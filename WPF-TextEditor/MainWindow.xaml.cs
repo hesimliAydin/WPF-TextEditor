@@ -98,7 +98,7 @@ namespace WPF_TextEditor
             if (sender is Button btn)
             {
 
-                switch (btn.Content.ToString())
+                switch (btn.Name.ToString())
                 {
                     case "B":
                         _isBold = !_isBold;
@@ -117,9 +117,12 @@ namespace WPF_TextEditor
                 {
                     txt.FontWeight = _isBold ? FontWeights.Bold : FontWeights.Normal;
                     txt.FontStyle = _isItalic ? FontStyles.Italic : FontStyles.Normal;
+                    txt.Selection.ApplyPropertyValue(Underline.TextDecorationsProperty, _isUnderLined ? FontWeights.Bold : FontWeights.Normal);
+
                 }
                 else
                 {
+
                     txt.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, _isBold ? FontWeights.Bold : FontWeights.Normal);
                     txt.Selection.ApplyPropertyValue(TextElement.FontStyleProperty, _isItalic ? FontStyles.Italic : FontStyles.Normal);
                 }

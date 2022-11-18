@@ -216,22 +216,29 @@
                             Style="{StaticResource formatFontStyle}"
                             DockPanel.Dock="Left"
                             Width="24"
-                            Command="EditingCommands.ToggleBold">
-                            <Label FontWeight="Bold" Content="B"></Label>
+                            Command="EditingCommands.ToggleBold" FontWeight="Bold" Content="B"
+                            Click="ButtonStyle_Click"
+                            Name="B"
+                            >
+                            
                         </Button>
 
                         <Button
                             Style="{StaticResource formatFontStyle}"
                             DockPanel.Dock="Right"
                             Width="22"
-                            Command="EditingCommands.ToggleUnderline">
+                            Command="EditingCommands.ToggleUnderline"
+                             Click="ButtonStyle_Click"
+                            Name="U">
                             <TextBlock TextDecorations="Underline" FontWeight="Bold">U</TextBlock>
                         </Button>
 
                         <Button 
                             Style="{StaticResource formatFontStyle}"
                             Width="18" 
-                            Command="EditingCommands.ToggleItalic">
+                            Command="EditingCommands.ToggleItalic"
+                             Click="ButtonStyle_Click"
+                            Name="I">
                             <TextBlock FontStyle="Italic" FontWeight="Bold">I</TextBlock>
                         </Button>
 

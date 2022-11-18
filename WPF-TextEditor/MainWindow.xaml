@@ -1,0 +1,206 @@
+﻿<Window x:Class="WPF_TextEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_TextEditor" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="AydinTextEditor"
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF2C9DD8" Offset="1"/>
+            <GradientStop Color="Yellow" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2C9DD8" Offset="0.23"/>
+                <GradientStop Color="Yellow" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.ColumnSpan="2" BorderThickness="0">
+            <TabControl.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Yellow" Offset="1"/>
+                    <GradientStop Color="#FF2C9DD8" Offset="0"/>
+                </LinearGradientBrush>
+            </TabControl.Background>
+
+            <TabItem FontSize="15" Header="File" Background="#FF5691D2" Foreground="FloralWhite">
+
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Yellow" Offset="1"/>
+                            <GradientStop Color="#FF2C9DD8" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+
+                    <Button
+                        Name="btnFileDialog"
+                        Background="Transparent"
+                        Foreground="FloralWhite"
+                        FontSize="20"
+                        Content="Open File"
+                        Click="btnFileDialogClick">
+                    </Button>
+
+                    <Button
+                        Name="btnSaveDialog"
+                        Background="Transparent"
+                        Foreground="FloralWhite"
+                        Grid.Row="1"
+                        FontSize="20"
+                        Content="Save File"
+                        Click="btnSaveDialogClick">
+                    </Button>
+
+                    <CheckBox 
+                        Name="chkAutoSave"
+                        Grid.Column="2"
+                        Grid.RowSpan="2"
+                        FontSize="20"
+                        Foreground="FloralWhite"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Checked="chkAutoSaveChecked"
+                        Content="AutoSave"
+                        Margin="0,21">
+                        
+                        
+                    </CheckBox>
+
+
+                </Grid>
+                
+            </TabItem>
+
+            <TabItem FontSize="15" Header="Color" Background="#FF5691D2" Foreground="FloralWhite">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Foreground="FloralWhite" HorizontalAlignment="Center" Content="Text Color"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="1" HorizontalAlignment="Center" Content="BackGround Color"></Label>
+
+
+
+
+                    <xctk:ColorPicker 
+                        Foreground="FloralWhite"
+                        Background="Transparent"
+                        Name="cpTextColor"
+                        Margin="3"
+                        Grid.Row="1"
+                        SelectedColorChanged="cpTextColorSelectedColorChanged">
+                    </xctk:ColorPicker>
+
+                    <xctk:ColorPicker
+                        Foreground="FloralWhite"
+                        Background="Transparent"
+                        Name="cpBackColor"
+                        Margin="3"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        SelectedColorChanged="cpBackColorSelectedColorChanged">
+                    </xctk:ColorPicker>
+                </Grid>
+            </TabItem>
+
+            <TabItem FontSize="15" Header="Text" Background="#FF5691D2" Foreground="FloralWhite">
+                <Grid>
+
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Button}" x:Key="formatFontStyle">
+                            <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="FontSize" Value="14"></Setter>
+                            <Setter Property="CommandTarget" Value="{Binding ElementName=txt}"></Setter>
+                        </Style>
+
+                        <Style TargetType="{x:Type Button}" x:Key="formatAlignmentStyle">
+
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="CommandTarget" Value="{Binding ElementName=txt}"></Setter>
+
+                        </Style>
+                    </Grid.Resources>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Foreground="FloralWhite" HorizontalAlignment="Center" Grid.ColumnSpan="2" Content="Font"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="2" HorizontalAlignment="Center" Content="Font Size"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="3" HorizontalAlignment="Center" Content="Font Style"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="4" HorizontalAlignment="Center" Content="Text Aligment"></Label>
+
+
+                    <ComboBox
+                        Background="Transparent"
+                        Grid.Row="1"
+                        Width="300"
+                        Grid.ColumnSpan="2"
+                        Name="cBoxFontStyle"
+                        FontSize="15"
+                        Margin="3,3"
+                        HorizontalContentAlignment="Center"
+                        >
+                        
+                    </ComboBox>
+
+                </Grid>
+            </TabItem>
+            
+
+
+        </TabControl>
+
+
+
+    </Grid>
+</Window>

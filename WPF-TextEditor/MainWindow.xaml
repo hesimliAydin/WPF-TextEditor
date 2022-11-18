@@ -91,13 +91,13 @@
                         Checked="chkAutoSaveChecked"
                         Content="AutoSave"
                         Margin="0,21">
-                        
-                        
+
+
                     </CheckBox>
 
 
                 </Grid>
-                
+
             </TabItem>
 
             <TabItem FontSize="15" Header="Color" Background="#FF5691D2" Foreground="FloralWhite">
@@ -161,11 +161,12 @@
                     </Grid.Resources>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="49*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
                     </Grid.ColumnDefinitions>
 
 
@@ -174,31 +175,120 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Foreground="FloralWhite" HorizontalAlignment="Center" Grid.ColumnSpan="2" Content="Font"></Label>
-                    <Label Foreground="FloralWhite" Grid.Column="2" HorizontalAlignment="Center" Content="Font Size"></Label>
-                    <Label Foreground="FloralWhite" Grid.Column="3" HorizontalAlignment="Center" Content="Font Style"></Label>
-                    <Label Foreground="FloralWhite" Grid.Column="4" HorizontalAlignment="Center" Content="Text Aligment"></Label>
+                    <Label Foreground="FloralWhite" HorizontalAlignment="Left" Grid.ColumnSpan="2" Content="Font" Grid.Column="1" Margin="127,0,0,0"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="3" HorizontalAlignment="Center" Content="Font Size"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="4" HorizontalAlignment="Center" Content="Font Style"></Label>
+                    <Label Foreground="FloralWhite" Grid.Column="5" HorizontalAlignment="Center" Content="Text Aligment"></Label>
 
 
                     <ComboBox
                         Background="Transparent"
                         Grid.Row="1"
                         Width="300"
-                        Grid.ColumnSpan="2"
+                        Grid.ColumnSpan="3"
                         Name="cBoxFontStyle"
                         FontSize="15"
-                        Margin="3,3"
+                        Margin="9,3,9,3"
                         HorizontalContentAlignment="Center"
-                        >
-                        
+                        SelectionChanged="cBoxFontStyleSelectionChanged">
                     </ComboBox>
+
+                    <ComboBox
+                        Background="Transparent"
+                        Width="130"
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Name="cBoxFontSize"
+                        HorizontalContentAlignment="Center"
+                        FontSize="15"
+                        Margin="15,3,15,3"
+                        SelectionChanged="cBoxFontSizeSelectionChanged">
+                    </ComboBox>
+
+
+                    <DockPanel 
+                        Width="100"
+                        Grid.Column="4" Margin="29,35,30,0" Grid.RowSpan="2">
+
+
+                        <Button
+                            Style="{StaticResource formatFontStyle}"
+                            DockPanel.Dock="Left"
+                            Width="24"
+                            Command="EditingCommands.ToggleBold">
+                            <Label FontWeight="Bold" Content="B"></Label>
+                        </Button>
+
+                        <Button
+                            Style="{StaticResource formatFontStyle}"
+                            DockPanel.Dock="Right"
+                            Width="22"
+                            Command="EditingCommands.ToggleUnderline">
+                            <TextBlock TextDecorations="Underline" FontWeight="Bold">U</TextBlock>
+                        </Button>
+
+                        <Button 
+                            Style="{StaticResource formatFontStyle}"
+                            Width="18" 
+                            Command="EditingCommands.ToggleItalic">
+                            <TextBlock FontStyle="Italic" FontWeight="Bold">I</TextBlock>
+                        </Button>
+
+
+                    </DockPanel>
+
+                    <DockPanel
+                        Width="100"
+                        Grid.Column="5" Margin="29,35,30,0" Grid.RowSpan="2">
+
+                        <Button
+                            Style="{StaticResource formatAlignmentStyle}"
+                            Width="18"
+                            FontSize="20"
+                            DockPanel.Dock="Left"
+                            Command="EditingCommands.AlignLeft"
+                            Content="L">
+                        </Button>
+
+                        <Button
+                            Style="{StaticResource formatAlignmentStyle}"
+                            Width="18"
+                            FontSize="20"
+                            DockPanel.Dock="Right"
+                            Command="EditingCommands.AlignRight"
+                            Content="R">
+                        </Button>
+
+                        <Button
+                            Style="{StaticResource formatAlignmentStyle}"
+                            Width="18"
+                            FontSize="20"
+                            DockPanel.Dock="Left"
+                            Command="EditingCommands.AlignCenter"
+                            Content="C">
+                        </Button>
+
+                    </DockPanel>
 
                 </Grid>
             </TabItem>
-            
-
 
         </TabControl>
+
+        <RichTextBox
+            Name="txt"
+            Grid.Row="1"
+            FontSize="9"
+            Margin="10"
+            Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" TextChanged="txtTextChanged">
+
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="9"/>
+                </Style>
+            </RichTextBox.Resources>
+
+        </RichTextBox>
 
 
 

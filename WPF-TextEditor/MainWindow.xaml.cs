@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,10 +25,26 @@ namespace WPF_TextEditor
     {
 
         private bool _isAutoSaveUsed = false;
+        private bool _isBold = false;
+        private bool _isItalic = false;
+        private bool _isUnderLined = false;
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            var fonts = new InstalledFontCollection();
+
+            foreach (System.Drawing.FontFamily font in fonts.Families)
+            {
+                cBoxFontStyle.Items.Add(font.Name);
+            }
+
+            for (int i = 9; i < 73; i++)
+                cBoxFontSize.Items.Add(i);
         }
 
         private void btnFileDialogClick(object sender, RoutedEventArgs e)
@@ -74,6 +91,41 @@ namespace WPF_TextEditor
 
                 chkAutoSave.IsChecked = false;
             }
+        }
+
+        private void ButtonStyle_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+
+                switch (btn.Content.ToString())
+                {
+                    case "B":
+                        _isBold = !_isBold;
+                        break;
+
+                    case "I":
+                        _isItalic = !_isItalic;
+                        break;
+
+                    default:
+                        _isUnderLined = !_isUnderLined;
+                        break;
+                }
+
+                if (txt.Selection.IsEmpty)
+                {
+                    txt.FontWeight = _isBold ? FontWeights.Bold : FontWeights.Normal;
+                    txt.FontStyle = _isItalic ? FontStyles.Italic : FontStyles.Normal;
+                }
+                else
+                {
+                    txt.Selection.ApplyPropertyValue(TextElement.FontWeightProperty, _isBold ? FontWeights.Bold : FontWeights.Normal);
+                    txt.Selection.ApplyPropertyValue(TextElement.FontStyleProperty, _isItalic ? FontStyles.Italic : FontStyles.Normal);
+                }
+
+            }
+
         }
 
         private void cpTextColorSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
